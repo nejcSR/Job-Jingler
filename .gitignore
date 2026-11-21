@@ -1,0 +1,7 @@
+.env
+job_hunt.db
+run.log
+__pycache__/
+*.pyc
+diagnostic*.png
+archives/

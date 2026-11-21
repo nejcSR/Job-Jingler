@@ -1,4 +1,4 @@
-# Job Hunt Agent
+# Job Jingler
 
 A Python agent that scrapes remote job listings, judges each one against my profile
 with an LLM, saves the results, and sends the promising ones to Discord. For the

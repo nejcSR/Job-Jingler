@@ -1,5 +1,5 @@
 from db.database import SessionLocal
-from db.models import PostingModel, DecisionModel, NoteModel  # CHANGED: also import NoteModel
+from db.models import PostingModel, DecisionModel, NoteModel
 from agent.schemas import Posting, Decision
 
 
@@ -48,7 +48,7 @@ def save_decision(decision: Decision) -> None:
     session.close()
 
 
-# ADDED: saves one cover note ({"subject": ..., "body": ...}) for a posting
+#saves one cover note ({"subject": ..., "body": ...}) for a posting
 def save_note(posting_id: int, note: dict) -> None:
     """Save a cover note into the database."""
     session = SessionLocal()

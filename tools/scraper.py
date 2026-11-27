@@ -3,8 +3,6 @@ import json
 
 from agent.schemas import Posting
 
-# CHANGED: a list of pages to scrape, instead of one hardcoded page.
-# Open each one in your browser first. Delete any that don't show a job list.
 SEARCH_URLS = [
     "https://remoteok.com/remote-python-jobs",
     "https://remoteok.com/remote-ai-jobs",
@@ -12,7 +10,7 @@ SEARCH_URLS = [
 ]
 
 
-# ADDED: this function scrapes ONE page. The old loop code moved in here.
+#this function scrapes ONE page.
 def _scrape_page(page, url: str, limit: int) -> list[Posting]:
     """Scrape one RemoteOK listing page and return up to `limit` postings."""
 
@@ -33,7 +31,7 @@ def _scrape_page(page, url: str, limit: int) -> list[Posting]:
         script = row.query_selector("script[type='application/ld+json']")
         href = row.get_attribute("data-href")
 
-        # ADDED: href check, so a row with no link can't crash the run
+        #href check, so a row with no link can't crash the run
         if not script or not href:
             skipped += 1
             continue
@@ -61,7 +59,7 @@ def scrape_remoteok(limit: int = 5, urls: list[str] | None = None) -> list[Posti
 
     urls = urls or SEARCH_URLS
     all_postings = []
-    seen_urls = set()  # ADDED: remembers jobs we already have, since one job can be on two pages
+    seen_urls = set()  #remembers jobs we already have, since one job can be on two pages
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -69,7 +67,6 @@ def scrape_remoteok(limit: int = 5, urls: list[str] | None = None) -> list[Posti
         page.set_default_timeout(60000)
 
         for url in urls:
-            # CHANGED: one bad page no longer kills the whole run
             try:
                 found = _scrape_page(page, url, limit)
             except Exception as e:

@@ -28,7 +28,6 @@ class DecisionModel(Base):
     decided_at = Column(DateTime, default=datetime.now)
 
 
-# ADDED: one saved cover note per row, linked to its posting by posting_id
 class NoteModel(Base):
     __tablename__ = "notes"
 

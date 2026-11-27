@@ -4,16 +4,14 @@ from dotenv import load_dotenv
 from groq import Groq
 
 from agent.schemas import Posting
-from agent.orchestrator import _strip_code_fences  # reuse the JSON clean-up we already wrote
+from agent.orchestrator import _strip_code_fences 
 
 load_dotenv()
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
-YOUR_NAME = "Nejc"  # change this to the name you want at the bottom of emails
+YOUR_NAME = "Nejc" 
 
-# CHANGED: three new rules in RULES below (complete first sentence, no "demonstrates/shows"
-# or "agent" wording, and Google OAuth mentioned without explaining its purpose).
-# The project facts are unchanged.
+
 WRITER_PROMPT = f"""You write short, honest cover notes for a self-taught Python developer \
 applying to Backend / AI Automation Engineer roles.
 
